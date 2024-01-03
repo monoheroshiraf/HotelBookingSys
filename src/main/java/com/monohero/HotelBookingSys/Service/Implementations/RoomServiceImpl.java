@@ -4,6 +4,7 @@ import com.monohero.HotelBookingSys.Entity.Room;
 import com.monohero.HotelBookingSys.Repository.RoomRepo;
 import com.monohero.HotelBookingSys.Service.RoomService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,12 +13,14 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class RoomServiceImpl implements RoomService {
 
 
+    @Autowired
     private final RoomRepo roomRepo;
     @Override
     public Room addNewRoom(MultipartFile photo, String roomType, BigDecimal roomPrice) throws SQLException, IOException {
@@ -30,5 +33,10 @@ public class RoomServiceImpl implements RoomService {
             room.setPhoto(photoBlob);
         }
         return roomRepo.save(room);
+    }
+
+    @Override
+    public List<Room> getAll() {
+        return roomRepo.findAll();
     }
 }

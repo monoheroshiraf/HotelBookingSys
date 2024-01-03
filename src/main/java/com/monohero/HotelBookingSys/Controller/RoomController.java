@@ -4,6 +4,7 @@ import com.monohero.HotelBookingSys.Entity.Room;
 import com.monohero.HotelBookingSys.Response.RoomResponse;
 import com.monohero.HotelBookingSys.Service.RoomService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,13 +15,14 @@ import java.sql.SQLException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/rooms")
+@RequestMapping("/hotel")
 public class RoomController {
 
+    @Autowired
     private final RoomService roomService;
 
 
-    @PostMapping("/add/newroom")
+    @PostMapping("/newroom")
     public ResponseEntity<RoomResponse> addNewRoom(
             @RequestParam("photo") MultipartFile photo,
             @RequestParam("roomType") String roomType,
@@ -32,4 +34,6 @@ public class RoomController {
 
         return ResponseEntity.ok(response);
     }
+
+
 }
